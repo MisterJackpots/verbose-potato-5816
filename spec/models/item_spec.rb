@@ -17,12 +17,26 @@ RSpec.describe Item, type: :model do
   end
 
   describe 'model methods' do
-    describe '#where_purchased' do
+    describe '#where_from' do
       it 'returns the name of supermarket where the item was purchased' do
-        expect(@milk.where_purchased).to eq(@safeway.name)
-        expect(@eggs.where_purchased).to eq(@safeway.name)
-        expect(@bread.where_purchased).to eq(@frys.name)
-        expect(@bacon.where_purchased).to eq(@frys.name)
+        expect(@milk.where_from).to eq(@safeway.name)
+        expect(@eggs.where_from).to eq(@safeway.name)
+        expect(@bread.where_from).to eq(@frys.name)
+        expect(@bacon.where_from).to eq(@frys.name)
+      end
+    end
+
+    describe '#purchase_count' do
+      it 'returns the number of customers that purcahsed an item' do
+        @sally = Customer.create!(name: 'Sally Shopper')
+        @billy = Customer.create!(name: 'Billy Buyer')
+        @customer_item1 = CustomerItem.create!(customer_id: @sally.id, item_id: @milk.id)
+
+        expect(@milk.purchase_count).to eq(1)
+
+        @customer_item2 = CustomerItem.create!(customer_id: @billy.id, item_id: @milk.id)
+
+        expect(@milk.purchase_count).to eq(2)
       end
     end
   end

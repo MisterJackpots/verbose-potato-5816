@@ -1,0 +1,10 @@
+<h1>Items Index Page</h1>
+
+<% @items.each do |item| %>
+  <div id="item_<%= item.id %>">
+    <p>Item: <%= item.name %></p>
+    <p>Price: $<%= item.price %>.00</p>
+    <p>Supermarket: <%= item.where_from %></p>
+    <p>Number of Customers Purchased: <%= item.purchase_count %></p>
+  </div>
+<% end %>
