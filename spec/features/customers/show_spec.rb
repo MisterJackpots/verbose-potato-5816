@@ -21,7 +21,7 @@ RSpec.describe 'the customers show page' do
     expect(page).to have_content(@sally.name)
   end
 
-  xit 'displays a list of all items' do
+  it 'displays a list of all items' do
     visit "/customers/#{@sally.id}"
 
     expect(page).to have_content(@milk.name)
@@ -30,12 +30,18 @@ RSpec.describe 'the customers show page' do
     expect(page).to_not have_content(@bacon.name)
   end
 
-  xit 'display each items name/price/supermarket' do
+  it 'display each items name/price/supermarket' do
     visit "/customers/#{@sally.id}"
 
-    within "#items_#{@customer_item1}" do
+    within "#item_#{@milk.id}" do
       expect(page).to have_content(@milk.name)
       expect(page).to have_content(@milk.price)
+      expect(page).to have_content(@safeway.name)
+    end
+
+    within "#item_#{@bread.id}" do
+      expect(page).to have_content(@bread.name)
+      expect(page).to have_content(@bread.price)
       expect(page).to have_content(@safeway.name)
     end
   end

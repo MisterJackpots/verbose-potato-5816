@@ -1,0 +1,12 @@
+<h1>Customer Show Page</h1>
+
+<p>Customer: <%= @customer.name %></p>
+
+<h3>Purchased Items</h3>
+<% @customer.items.each do |item| %>
+  <div id="item_<%= item.id %>">
+    <p>Name: <%= item.name %></p>
+    <p>Price: $<%= item.price %>.00</p>
+    <p>Purchased From: <%= item.where_purchased %></p>
+  <div>
+<% end %>
