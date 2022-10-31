@@ -1,3 +1,3 @@
-class Supermarket < ApplicationRecord
+supeclass Supermarket < ApplicationRecord
   has_many :items
 end

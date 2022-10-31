@@ -22,7 +22,7 @@ RSpec.describe 'the items index page' do
 
   it 'lists name/price/supermarket/customer count of all items' do
     visit '/items'
-    save_and_open_page
+    
     within "#item_#{@milk.id}" do
       expect(page).to have_content(@milk.name)
       expect(page).to have_content(@milk.price)
