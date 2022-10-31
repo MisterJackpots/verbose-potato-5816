@@ -7,6 +7,7 @@ RSpec.describe 'the customers show page' do
     @eggs = Item.create!(name: 'Eggs', price: 2, supermarket_id: @safeway.id)
     @bread = Item.create!(name: 'Bread', price: 3, supermarket_id: @safeway.id)
     @bacon = Item.create!(name: 'Bacon', price: 8, supermarket_id: @safeway.id)
+    @cheese = Item.create!(name: 'Cheese', price: 5, supermarket_id: @safeway.id)
     @sally = Customer.create!(name: 'Sally Shopper')
     @billy = Customer.create!(name: 'Billy Buyer')
     @customer_item1 = CustomerItem.create!(customer_id: @sally.id, item_id: @milk.id)
@@ -44,5 +45,23 @@ RSpec.describe 'the customers show page' do
       expect(page).to have_content(@bread.price)
       expect(page).to have_content(@safeway.name)
     end
+  end
+
+  it 'has a form to add an item to the customer' do
+    visit "/customers/#{@sally.id}"
+
+    expect(page).to have_field('Add Item to This Customer')
+  end
+
+  it 'can add an item to the customer' do
+    visit "/customers/#{@sally.id}"
+
+    fill_in('Add Item to This Customer', with: "#{@cheese.id}")
+    click_on('Add Item')
+
+    expect(current_path).to eq("/customers/#{@sally.id}")
+    expect(page).to have_content(@milk.name)
+    expect(page).to have_content(@bread.name)
+    expect(page).to have_content(@cheese.name)
   end
 end
