@@ -51,6 +51,7 @@ RSpec.describe 'the customers show page' do
     visit "/customers/#{@sally.id}"
 
     expect(page).to have_field('Add Item to This Customer')
+    expect(page).to have_button('Add Item')
   end
 
   it 'can add an item to the customer' do

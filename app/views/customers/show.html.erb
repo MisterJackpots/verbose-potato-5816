@@ -10,3 +10,9 @@
     <p>Purchased From: <%= item.where_purchased %></p>
   <div>
 <% end %>
+
+<%= form_with url: "/customers/#{@customer.id}/items", method: :patch, local: true do |form| %>
+  <%= form.label :item_id, 'Add Item to This Customer' %>
+  <%= form.text_field :item_id %><br>
+  <%= form.submit 'Add Item' %>
+<% end %>
